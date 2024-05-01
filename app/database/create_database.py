@@ -1,7 +1,7 @@
 import motor.motor_asyncio
 
-MONGO_DETAILS = "mongodb://localhost:27017"
-# MONGO_DETAILS = "mongodb+srv://admin:JZ0URF8Dugb03X0C@cluster0.5m1v9fn.mongodb.net/"
+# MONGO_DETAILS = "mongodb://localhost:27017"
+MONGO_DETAILS = "mongodb+srv://admin:JZ0URF8Dugb03X0C@cluster0.5m1v9fn.mongodb.net/"
 
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
 
