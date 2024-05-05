@@ -49,7 +49,7 @@ class BidData(BaseModel):
 
 class BiddingData(BaseModel):
     initialPrice: float
-    hoursUntilClose: int
+    BidEndTime: datetime
     bids: List[BidData]
 
 class PropertySchema(BaseModel):
@@ -125,7 +125,7 @@ class PropertySchema(BaseModel):
                 ],
                 "biddingData": {
                     "initialPrice": 469000,
-                    "hoursUntilClose": 12,
+                    "bidEndTime": datetime(2024, 5, 1, 12, 0), 
                     "bids": [
                         { "bidder": 'John Doe', "amount": 470000, "time": datetime(2024, 4, 25, 14, 0) },
                         { "bidder": 'Jane Smith', "amount": 471000, "time": datetime(2024, 4, 26, 15, 30) }
@@ -208,7 +208,7 @@ class UpdatePropertyModel(BaseModel):
                 ],
                 "biddingData": {
                     "initialPrice": 469000,
-                    "hoursUntilClose": 12,
+                     "bidEndTime": datetime(2024, 5, 1, 12, 0), 
                     "bids": [
                         { "bidder": 'John Doe', "amount": 470000, "time": datetime(2024, 4, 25, 14, 0) },
                         { "bidder": 'Jane Smith', "amount": 471000, "time": datetime(2024, 4, 26, 15, 30) }
