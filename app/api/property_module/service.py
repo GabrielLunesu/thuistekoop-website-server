@@ -1,7 +1,10 @@
 from bson.objectid import ObjectId
 from app.database.create_database import property_collection, property_helper
 # Retrieve all propertys present in the database
-
+from fastapi import FastAPI, HTTPException, Body
+from pydantic import BaseModel
+from datetime import datetime
+from typing import List
 
 
 async def retrieve_properties():
@@ -38,6 +41,10 @@ async def update_property(id: str, data: dict):
         if updated_property:
             return True
         return False
+    if property.bidEndTime < datetime.now():
+        raise HTTPException(status_code=400, detail="Bid end time cannot be in the past")
+    # Your logic to update the database
+    return {"msg": "Property updated", "data": property}
 
 
 # Delete a property from the database
