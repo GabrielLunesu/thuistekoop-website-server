@@ -49,7 +49,7 @@ class BidData(BaseModel):
 
 class BiddingData(BaseModel):
     initialPrice: float
-    BidEndTime: datetime
+    bidEndTime: datetime
     bids: List[BidData]
 
 class PropertySchema(BaseModel):
