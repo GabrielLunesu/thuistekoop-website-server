@@ -126,6 +126,7 @@ class PropertySchema(BaseModel):
                 "biddingData": {
                     "initialPrice": 469000,
                     "bidEndTime": datetime(2024, 4, 25, 14, 0), 
+                
                     "bids": [
                         { "bidder": 'John Doe', "amount": 470000, "time": datetime(2024, 4, 25, 14, 0) },
                         { "bidder": 'Jane Smith', "amount": 471000, "time": datetime(2024, 4, 26, 15, 30) }
