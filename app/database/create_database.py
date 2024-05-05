@@ -34,7 +34,7 @@ def property_helper(property_doc) -> dict:
         "garagedetails": property_doc["garagedetails"],
         "biddingData": {
             "initialPrice": property_doc["biddingData"]["initialPrice"],
-            "hoursUntilClose": property_doc["biddingData"]["hoursUntilClose"],
+            "BidEndTime": property_doc["biddingData"]["BidEndTime"],
             "bids": [
                 {
                     "bidder": bid["bidder"],
