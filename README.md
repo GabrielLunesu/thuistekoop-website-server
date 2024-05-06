@@ -7,3 +7,5 @@ install dependencies
 
 
 pip install -r requirements.txt
+
+https://thuistekoop-website-server-1.onrender.com/docs
