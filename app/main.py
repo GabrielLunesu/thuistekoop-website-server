@@ -1,6 +1,8 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.property_module.views import router as PropertyRouter
+from app.api.booking_module.views import router as booking_router
+
 
 api_router = APIRouter(
     prefix="/api/v1",
@@ -8,6 +10,9 @@ api_router = APIRouter(
 
 app = FastAPI(title="Thuistekoop")
 app.include_router(PropertyRouter, tags=["Property"], prefix="/api/v1/property")
+app.include_router(booking_router)
+
+
 
 # Set all CORS enabled origins
 app.add_middleware(

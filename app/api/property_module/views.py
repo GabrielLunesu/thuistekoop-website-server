@@ -1,5 +1,8 @@
 from fastapi import APIRouter, Body, Response,HTTPException
 from fastapi.encoders import jsonable_encoder
+from datetime import datetime
+from typing import List
+
 
 from app.api.property_module.db_models import PropertySchema, UpdatePropertyModel
 from app.api.property_module.service import (
@@ -8,6 +11,7 @@ from app.api.property_module.service import (
     update_property,
     delete_property,
     retrieve_property,
+    
 )
 from app.api.commons.api_models import (
     GenericFilterParameters,
@@ -18,6 +22,29 @@ from app.api.commons.api_models import (
     status
 )
 router = APIRouter()
+
+# # book dates!
+
+# async def add_booking_dates(property_id: str, new_dates: List[datetime]):
+#     # Assuming the existence of a function that fetches a property
+#     property = await get_property_data(property_id)
+#     if property is None:
+#         return False
+    
+#     if not hasattr(property, 'bookingDates'):
+#         property.bookingDates = []
+
+#     property.bookingDates.extend(new_dates)
+#     # Code to save the updated property back to the database
+#     await update_property_data(property)
+#     return True
+# @router.post("/{id}/booking-dates/")
+# async def add_dates_to_property(id: str, dates: List[datetime] = Body(...)):
+#     print(f"Received dates: {dates}")  # Debugging line to check what is being received
+#     if await add_booking_dates(id, dates):
+#         return {"msg": "Booking dates added successfully"}
+#     raise HTTPException(status_code=404, detail="Property not found")
+
 
 
 @router.post(

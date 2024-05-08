@@ -1,26 +1,12 @@
-from datetime import datetime
+from datetime import datetime, time
 from typing import List, Optional
+from pydantic import BaseModel, EmailStr
+
 
 from pydantic import BaseModel, EmailStr, Field
 
 
-# class PropertySchema(BaseModel):
-#     fullname: str = Field(...)
-#     email: EmailStr = Field(...)
-#     course_of_study: str = Field(...)
-#     year: int = Field(..., gt=0, lt=9)
-#     gpa: float = Field(..., le=4.0)
 
-#     class Config:
-#         schema_extra = {
-#             "example": {
-#                 "fullname": "John Doe",
-#                 "email": "jdoe@x.edu.ng",
-#                 "course_of_study": "Water resources engineering",
-#                 "year": 2,
-#                 "gpa": "3.0",
-#             }
-#         }
 
 class DetailItem(BaseModel):
     label: str
@@ -51,7 +37,16 @@ class BiddingData(BaseModel):
     initialPrice: float
     bidEndTime: datetime
     bids: List[BidData]
+    
+    
+class BookingSlot(BaseModel):
+    bookingDate: datetime
+    bookingTime: time
 
+class BookingData(BaseModel):
+    bookingSlots: Optional[List[BookingSlot]]
+
+     
 class PropertySchema(BaseModel):
     title: str
     address: str
@@ -67,6 +62,8 @@ class PropertySchema(BaseModel):
     parkdetails: List[DetailItem]
     garagedetails: List[DetailItem]
     biddingData: BiddingData
+    bookingData: BookingData
+
     class Config:
         schema_extra = {
             "example": {
@@ -131,7 +128,19 @@ class PropertySchema(BaseModel):
                         { "bidder": 'John Doe', "amount": 470000, "time": datetime(2024, 4, 25, 14, 0) },
                         { "bidder": 'Jane Smith', "amount": 471000, "time": datetime(2024, 4, 26, 15, 30) }
                     ]
-                }
+                },
+                "bookingData": {
+                "bookingSlots": [
+                    {
+                        "bookingDate": datetime(2024, 5, 1),
+                        "bookingTime": time(14, 30)
+                    },
+                    {
+                        "bookingDate": datetime(2024, 5, 2),
+                        "bookingTime": time(15, 0)
+                    }
+                ]
+            }             
             }
         }
 
@@ -151,6 +160,8 @@ class UpdatePropertyModel(BaseModel):
     parkdetails: List[DetailItem]
     garagedetails: List[DetailItem]
     biddingData: BiddingData
+    bookingData: BookingData
+
     class Config:
         schema_extra = {
             "example": {
@@ -214,6 +225,18 @@ class UpdatePropertyModel(BaseModel):
                         { "bidder": 'John Doe', "amount": 470000, "time": datetime(2024, 4, 25, 14, 0) },
                         { "bidder": 'Jane Smith', "amount": 471000, "time": datetime(2024, 4, 26, 15, 30) }
                     ]
-                }
+                },
+                "bookingData": {
+                "bookingSlots": [
+                    {
+                        "bookingDate": datetime(2024, 5, 1),
+                        "bookingTime": time(14, 30)
+                    },
+                    {
+                        "bookingDate": datetime(2024, 5, 2),
+                        "bookingTime": time(15, 0)
+                    }
+                ]
             }
-        }
+ }
+}

@@ -7,6 +7,8 @@ from datetime import datetime
 from typing import List
 
 
+
+
 async def retrieve_properties():
     propertys = []
     async for property in property_collection.find():
