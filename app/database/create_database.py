@@ -17,30 +17,43 @@ def property_helper(property_doc) -> dict:
     :param property_doc: A document from MongoDB containing property data.
     :return: A simplified dictionary of property data.
     """
-    return {
+    property_data = {
         "id": str(property_doc["_id"]),
-        "title": property_doc["title"],
-        "address": property_doc["address"],
-        "price": property_doc["price"],
-        "images": property_doc["images"],
-        "details": property_doc["details"],
-        "description": property_doc["description"],
-        "space": property_doc["space"],
-        "build": property_doc["build"],
-        "layoutDetailsData": property_doc["layoutDetailsData"],
-        "outdoor": property_doc["outdoor"],
-        "energyData": property_doc["energyData"],
-        "parkdetails": property_doc["parkdetails"],
-        "garagedetails": property_doc["garagedetails"],
+        "title": property_doc.get("title", ""),
+        "address": property_doc.get("address", ""),
+        "price": property_doc.get("price", ""),
+        "images": property_doc.get("images", []),
+        "details": property_doc.get("details", []),
+        "description": property_doc.get("description", ""),
+        "space": property_doc.get("space", []),
+        "build": property_doc.get("build", []),
+        "layoutDetailsData": property_doc.get("layoutDetailsData", {}),
+        "outdoor": property_doc.get("outdoor", []),
+        "energyData": property_doc.get("energyData", {}),
+        "parkdetails": property_doc.get("parkdetails", []),
+        "garagedetails": property_doc.get("garagedetails", []),
         "biddingData": {
-            "initialPrice": property_doc["biddingData"]["initialPrice"],
-            "bidEndTime": property_doc["biddingData"]["bidEndTime"],
+            "initialPrice": property_doc.get("biddingData", {}).get("initialPrice", 0),
+            "bidEndTime": property_doc.get("biddingData", {}).get("bidEndTime"),
             "bids": [
                 {
-                    "bidder": bid["bidder"],
-                    "amount": bid["amount"],
-                    "time": bid["time"]
-                } for bid in property_doc["biddingData"]["bids"]
+                    "bidder": bid.get("bidder", ""),
+                    "amount": bid.get("amount", 0),
+                    "time": bid.get("time")
+                } for bid in property_doc.get("biddingData", {}).get("bids", [])
+            ]
+        },
+    }
+
+    # Optional: Include booking data if it exists
+    if "bookingData" in property_doc:
+        property_data["bookingData"] = {
+            "bookingSlots": [
+                {
+                    "bookingDate": slot.get("bookingDate"),
+                    "bookingTime": slot.get("bookingTime")
+                } for slot in property_doc["bookingData"].get("bookingSlots", [])
             ]
         }
-    }
+
+    return property_data
