@@ -41,7 +41,7 @@ class BiddingData(BaseModel):
     
 class BookingSlot(BaseModel):
     bookingDate: datetime
-    bookingTime: time
+    bookingTime: str
 
 class BookingData(BaseModel):
     bookingSlots: Optional[List[BookingSlot]]
@@ -133,11 +133,11 @@ class PropertySchema(BaseModel):
                 "bookingSlots": [
                     {
                         "bookingDate": datetime(2024, 5, 1),
-                        "bookingTime": time(14, 30)
+                        "bookingTime": "14:30"
                     },
                     {
                         "bookingDate": datetime(2024, 5, 2),
-                        "bookingTime": time(15, 0)
+                        "bookingTime": "14:30"
                     }
                 ]
             }             
@@ -230,11 +230,11 @@ class UpdatePropertyModel(BaseModel):
                 "bookingSlots": [
                     {
                         "bookingDate": datetime(2024, 5, 1),
-                        "bookingTime": time(14, 30)
+                        "bookingTime": "14:30"
                     },
                     {
                         "bookingDate": datetime(2024, 5, 2),
-                        "bookingTime": time(15, 0)
+                        "bookingTime": "14:30"
                     }
                 ]
             }
